@@ -1,0 +1,31 @@
+<html>
+    <head>
+       <title>Login</title>
+    </head>
+    <body>
+        <div id='wrapper'>
+            <div class='box'>
+                <form action='/users' method='POST'>
+                    <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+                    <br>
+                    <label>Email: <input type='text' name='user[email]'></label>
+                    <br>
+                    <label>Name: <input type='text' name='user[name]'></label>
+                    <br>
+                    <label>Password: <input type='text' name='user[password]'></label>
+                    <br>
+                    <label>Password Confirmation: <input type='text' name='user[password_confirmation]'></label>
+                    <br>
+                    <input type='submit' value='Join'>
+                </form>
+            </div>
+            <% if flash[:errors] %>
+                <% flash[:errors].each do |i| %>
+                    <ul style="list-style: none;">
+                        <li><%= i %></li>
+                    </ul>
+                <% end %>
+            <% end %>
+        </div>
+    </body>
+</html>

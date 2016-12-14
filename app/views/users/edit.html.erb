@@ -1,0 +1,30 @@
+<html>
+    <head>
+       <title>Login</title>
+    </head>
+    <body>
+        <div id='wrapper'>
+            <div class='box'>
+                <form action='/users/<%= @user.id %>' method='POST'>
+                    <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+                    <input type="hidden" name="_method" value="patch">
+                    <label>Email: <input type='text' value="<%= @user.email %>" name='user[email]'></label>
+                    <label>Name: <input type='text' value="<%= @user.name %>" name='user[name]'></label>
+                    <input type='submit' value='Update'>
+                </form>
+                <form action='/users/<%= @user.id %>' method='POST'>
+                    <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+                    <input type="hidden" name="_method" value="delete">
+                    <input type='submit' value='Delete Account'>
+                </form>
+            </div>
+            <% if flash[:errors] %>
+                <% flash[:errors].each do |i| %>
+                    <ul style="list-style: none;">
+                        <li><%= i %></li>
+                    </ul>
+                <% end %>
+            <% end %>
+        </div>
+    </body>
+</html>

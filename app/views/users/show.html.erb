@@ -1,0 +1,64 @@
+<html>
+    <head>
+       <title>Show User</title>
+    </head>
+    <body>
+        <div id='wrapper'>
+            <div class='box'>
+                <h4>Hi <%= @user.name %>!</h4>
+                <a href="/users/<%= @user.id %>/edit" data-method='get'>Edit Profile</a>
+                <form action='/secrets' method='POST'>
+                    <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+                    <label>New Secret: <input type='text' name='form[content]'></label>
+                    <input type='submit' value='Create Secret'>
+                </form>
+            </div>
+            <div id="my_secrets">
+                <h5>My Secrets</h5>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Secrets</th>
+                            <th>Likes</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% @secrets.each do |secret| %>
+                            <tr>
+                                <td><%= secret.content %></td>
+                                <td><%= secret.likes.count %> likes</td>
+                                <td>
+                                    <form action='/secrets/<%= secret.id %>' method='POST'>
+                                        <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+                                        <input type="hidden" name="_method" value="delete">
+                                        <input type='submit' value='Delete'>
+                                    </form>
+                                </td>
+                            </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+            </div>
+            <div id="secrets_liked">
+                <h5>Secrets Liked</h5>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Secrets</th>
+                            <th>Likes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% @secrets_liked.each do |sl| %>
+                            <tr>
+                                <td><%= sl.content %></td>
+                                <td><%= sl.likes.count %> likes</td>
+                            </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>

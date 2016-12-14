@@ -1,0 +1,24 @@
+<html>
+    <head>
+       <title>Login</title>
+    </head>
+    <body>
+        <div id='wrapper'>
+            <div class='box'>
+                <form action='/sessions' method='POST'>
+                    <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+                    <p>Email: <input type='text' name='Email'></p>
+                    <p>Password: <input type='text' name='Password'></p>
+                    <input type='submit' value='Log In'>
+                </form>
+            </div>
+            <% if flash[:errors] %>
+                <% flash[:errors].each do |i| %>
+                    <ul style="list-style: none;">
+                        <li><%= i %></li>
+                    </ul>
+                <% end %>
+            <% end %>
+        </div>
+    </body>
+</html>
